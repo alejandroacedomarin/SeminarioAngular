@@ -1,0 +1,51 @@
+
+
+<div *ngIf=" selectedPost">
+  <form [formGroup]="editPostForm" >
+
+    <label for="_id" >Id:</label>
+      <input type="text" id="_id" formControlName="_id" >{{selectedPost._id}}<br>
+      <div *ngIf="editPostForm.get('_id')?.invalid && (editPostForm.get('_id')?.dirty || editPostForm.get('_id')?.touched)">
+        <div *ngIf="editPostForm.get('_id')?.errors?.['required']" class="required-error">Id es obligatorio.</div>
+      </div>
+
+      <label for="title" >Title:</label>
+      <input type="text" id="title" formControlName="title" >{{selectedPost.title}}<br>
+      <div *ngIf="editPostForm.get('title')?.invalid && (editPostForm.get('title')?.dirty || editPostForm.get('title')?.touched)">
+        <div *ngIf="editPostForm.get('title')?.errors?.['required']" class="required-error">Title es obligatorio.</div>
+      </div>
+    
+      <label for="content">Content:</label>
+      <input type="text" id="content" formControlName="content" >{{selectedPost.content}}<br>
+      <div *ngIf="editPostForm.get('content')?.invalid && (editPostForm.get('content')?.dirty || editPostForm.get('content')?.touched)">
+        <div *ngIf="editPostForm.get('content')?.errors?.['required']" class="required-error">Content es obligatorio.</div>
+      </div>
+      <label for="author">Author:</label>
+      <input type="text" id="author" formControlName="author" >{{selectedPost.author}}<br>
+      <div *ngIf="editPostForm.get('author')?.invalid && (editPostForm.get('author')?.dirty || editPostForm.get('author')?.touched)">
+        <div *ngIf="editPostForm.get('author')?.errors?.['required']" class="required-error">Author es obligatorio.</div>
+      </div>
+    
+    
+      <button (click)="editPost()">Edit Post</button>
+      <button (click)="updatePost()">Post Post</button>
+      <button (click)="deletePost()">Delete Post</button>
+      <button (click)="deselect.emit()">Back to Posts</button>
+
+  </form>
+</div>
+
+
+  <ul class="posts" *ngIf="!selectedPost">
+    <li *ngFor="let post of posts">
+      <button type="button" (click)="onSelect(post)">
+        <h2>{{post.title}}</h2>
+        <div><span>ID:</span> {{post._id}}</div>
+        <div><span>User ID:</span> {{post.author}}</div>
+        <div><span>Content:</span> {{post.content}}</div>
+        </button>
+        
+      
+    </li>
+  </ul>
+  
